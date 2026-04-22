@@ -35,5 +35,14 @@ Fast Forward Labs runs a six-agent Hermes team against a four-tier productized o
 
 ## Skill sources
 
-- Corey Haines — `coreyhaines31/marketingskills` (installed and pending entries in `skills-lock.json`).
-- Eric Osiu — `ericosiu/ai-marketing-skills` referenced as `externalCapabilities` in each agent's AGENTS.md (Growth Engine, Content Ops, Outbound Engine, Sales Pipeline, SEO Ops, Finance Ops). Install separately to activate the experiment, quality-gate, trigger-prospecting, and finance-ops layers.
+- Corey Haines — `coreyhaines31/marketingskills` (9 installed + 22 registered pending install in `skills-lock.json`).
+- Eric Osiu — `ericosiu/ai-marketing-skills` (6 bundle skills installed: `growth-engine`, `content-ops`, `outbound-engine`, `sales-pipeline`, `seo-ops`, `finance-ops`). Wired directly into the `skills:` frontmatter of the agents that use them.
+
+## Skill-to-agent matrix (Osiu)
+
+- `growth-engine` → cro-agent, linkedin-agent, strategy-agent
+- `content-ops` → copywriting-agent, linkedin-agent
+- `outbound-engine` → outbound-agent
+- `sales-pipeline` → outbound-agent
+- `seo-ops` → seo-geo-agent
+- `finance-ops` → strategy-agent

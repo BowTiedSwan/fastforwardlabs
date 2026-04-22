@@ -155,6 +155,42 @@
       "source": "coreyhaines31/marketingskills",
       "sourceType": "github",
       "computedHash": "pending-install"
+    },
+    "growth-engine": {
+      "source": "ericosiu/ai-marketing-skills",
+      "sourceType": "github",
+      "sourcePath": "growth-engine",
+      "computedHash": "9e798d813dea3985b98e71ea4c08f29b31d0cd84ae027f23a75071af24656b5f"
+    },
+    "content-ops": {
+      "source": "ericosiu/ai-marketing-skills",
+      "sourceType": "github",
+      "sourcePath": "content-ops",
+      "computedHash": "11215ae7decd839ed922f226c87ea176dffd6a2e319241f7f98e272ff186be74"
+    },
+    "outbound-engine": {
+      "source": "ericosiu/ai-marketing-skills",
+      "sourceType": "github",
+      "sourcePath": "outbound-engine",
+      "computedHash": "20f87be1097ada4bd46b1090e643770d7435b98442f4d10124b9c036af04b9d1"
+    },
+    "sales-pipeline": {
+      "source": "ericosiu/ai-marketing-skills",
+      "sourceType": "github",
+      "sourcePath": "sales-pipeline",
+      "computedHash": "db9a84622467eea479264ce22d0025d705461387837a6453caf851e9aeddfef9"
+    },
+    "seo-ops": {
+      "source": "ericosiu/ai-marketing-skills",
+      "sourceType": "github",
+      "sourcePath": "seo-ops",
+      "computedHash": "93f20ced618730d39077e047924738408aade6c30dae181ab0a78c9df625887a"
+    },
+    "finance-ops": {
+      "source": "ericosiu/ai-marketing-skills",
+      "sourceType": "github",
+      "sourcePath": "finance-ops",
+      "computedHash": "7e362517d046b5c7cbf06cfed279bf7dd8909b5b29e4b3973edb2b890620f84b"
     }
   }
 }
