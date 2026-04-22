@@ -10,8 +10,7 @@ metadata:
       repo: coreyhaines31/marketingskills
       usage: upstream
 install:
-  status: pending
-  note: Run the skills install flow to materialize .agents/skills/cold-email.
+  status: installed
 ---
 
 Reference the project-installed cold-email skill.

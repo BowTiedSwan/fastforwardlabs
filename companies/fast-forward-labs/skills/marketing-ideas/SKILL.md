@@ -10,8 +10,7 @@ metadata:
       repo: coreyhaines31/marketingskills
       usage: upstream
 install:
-  status: pending
-  note: Run the skills install flow to materialize .agents/skills/marketing-ideas.
+  status: installed
 ---
 
 Reference the project-installed marketing-ideas skill.

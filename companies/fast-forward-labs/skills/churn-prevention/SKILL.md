@@ -10,8 +10,7 @@ metadata:
       repo: coreyhaines31/marketingskills
       usage: upstream
 install:
-  status: pending
-  note: Run the skills install flow to materialize .agents/skills/churn-prevention.
+  status: installed
 ---
 
 Reference the project-installed churn-prevention skill.

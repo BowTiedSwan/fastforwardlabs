@@ -35,7 +35,7 @@ Fast Forward Labs runs a six-agent Hermes team against a four-tier productized o
 
 ## Skill sources
 
-- Corey Haines — `coreyhaines31/marketingskills` (9 installed + 22 registered pending install in `skills-lock.json`).
+- Corey Haines — `coreyhaines31/marketingskills` (31 skills installed).
 - Eric Osiu — `ericosiu/ai-marketing-skills` (6 bundle skills installed: `growth-engine`, `content-ops`, `outbound-engine`, `sales-pipeline`, `seo-ops`, `finance-ops`). Wired directly into the `skills:` frontmatter of the agents that use them.
 
 ## Skill-to-agent matrix (Osiu)

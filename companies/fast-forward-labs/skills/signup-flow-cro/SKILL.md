@@ -10,8 +10,7 @@ metadata:
       repo: coreyhaines31/marketingskills
       usage: upstream
 install:
-  status: pending
-  note: Run the skills install flow to materialize .agents/skills/signup-flow-cro.
+  status: installed
 ---
 
 Reference the project-installed signup-flow-cro skill.
