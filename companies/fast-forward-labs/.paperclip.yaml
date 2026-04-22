@@ -1,0 +1,44 @@
+adapterEnvInputs: []
+agents:
+  seo-geo-agent:
+    adapterType: hermes_local
+    adapterConfig:
+      cwd: /Users/swan/Documents/fastforwardlabs
+      hermesCommand: /Users/swan/Documents/fastforwardlabs/scripts/hermes/fastforwardlabsseogeo
+      model: anthropic/claude-sonnet-4
+      persistSession: true
+      toolsets: terminal,file,web
+      worktreeMode: false
+      extraArgs:
+        - -s
+        - ai-seo
+        - -s
+        - seo-audit
+        - -s
+        - schema-markup
+        - -s
+        - content-strategy
+        - -s
+        - product-marketing-context
+  linkedin-agent:
+    adapterType: hermes_local
+    adapterConfig:
+      cwd: /Users/swan/Documents/fastforwardlabs
+      hermesCommand: /Users/swan/Documents/fastforwardlabs/scripts/hermes/fastforwardlabslinkedin
+      model: anthropic/claude-sonnet-4
+      persistSession: true
+      toolsets: terminal,file,web
+      worktreeMode: false
+      extraArgs:
+        - -s
+        - social-content
+        - -s
+        - copywriting
+        - -s
+        - copy-editing
+        - -s
+        - content-strategy
+        - -s
+        - marketing-psychology
+        - -s
+        - product-marketing-context

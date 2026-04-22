@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f2f1ec;
+  --foreground: #121212;
+  --muted: #62605a;
+  --line: rgba(18, 18, 18, 0.14);
+  --panel: rgba(255, 255, 255, 0.58);
+  --accent: #e7581a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-panel: var(--panel);
+  --color-accent: var(--accent);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), sans-serif;
+  background-image:
+    linear-gradient(to right, rgba(18, 18, 18, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(18, 18, 18, 0.035) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(231, 88, 26, 0.16);
+}
+
+.prose-shell :where(h1, h2, h3) {
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  color: var(--foreground);
+  text-wrap: balance;
+}
+
+.prose-shell h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 0.95;
+}
+
+.prose-shell h2 {
+  margin-top: 3rem;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.prose-shell h3 {
+  margin-top: 2rem;
+  font-size: 1.25rem;
+}
+
+.prose-shell p,
+.prose-shell li,
+.prose-shell td,
+.prose-shell th {
+  color: color-mix(in srgb, var(--foreground) 74%, transparent);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.prose-shell {
+  min-width: 0;
+}
+
+.prose-shell :where(p, li, blockquote, td, th, a) {
+  overflow-wrap: anywhere;
+}
+
+.prose-shell ul {
+  padding-left: 1.25rem;
+}
+
+.prose-shell table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  table-layout: fixed;
+}
+
+.prose-shell th,
+.prose-shell td {
+  padding: 0.9rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+}
+
+.prose-shell blockquote {
+  margin: 1.5rem 0;
+  padding-left: 1rem;
+  border-left: 2px solid var(--accent);
+}
+
+.prose-shell code {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.95em;
+  overflow-wrap: anywhere;
+}
+
+.prose-shell img {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 639px) {
+  .prose-shell h1 {
+    font-size: clamp(1.9rem, 9vw, 2.6rem);
+    line-height: 1;
+  }
+
+  .prose-shell h2 {
+    margin-top: 2.5rem;
+    font-size: 1.45rem;
+    line-height: 1.1;
+  }
+
+  .prose-shell h3 {
+    margin-top: 1.75rem;
+    font-size: 1.15rem;
+  }
+
+  .prose-shell th,
+  .prose-shell td {
+    padding: 0.75rem 0.65rem;
+  }
+}

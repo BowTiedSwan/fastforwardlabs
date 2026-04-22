@@ -1,0 +1,12 @@
+.DS_Store
+.next
+node_modules
+coverage
+dist
+*.log
+.env
+.env.local
+.env.*.local
+
+.claude/settings.local.json
+.playwright-mcp/

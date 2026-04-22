@@ -1,0 +1,48 @@
+name: Daily SEO and GEO ideas
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.32.1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate SEO and GEO ideas
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
+        run: pnpm --filter @fastforwardlabs/agents seo-geo
+
+      - name: Create pull request with generated content
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: "chore: refresh daily seo and geo ideas"
+          title: "chore: refresh daily seo and geo ideas"
+          body: |
+            Automated daily SEO and GEO content draft refresh for Fast Forward Labs.
+          branch: automation/daily-seo-geo
+          delete-branch: true

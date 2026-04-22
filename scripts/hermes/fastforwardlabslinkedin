@@ -1,0 +1,3 @@
+#!/bin/sh
+export HERMES_HOME="/Users/swan/.hermes/profiles/fastforwardlabslinkedin"
+exec /Users/swan/.local/bin/hermes "$@"
