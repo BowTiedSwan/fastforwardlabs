@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { trackProps } from "@/lib/analytics";
 import { services } from "@/lib/services";
 
 export function SiteFooter() {
@@ -12,13 +13,13 @@ export function SiteFooter() {
           </p>
           <p>Practical AI advice. Working systems. Capable teams.</p>
           <p className="text-xs">© {new Date().getFullYear()} Fast Forward Labs</p>
-          <Link href="/contact" className="inline-flex min-h-11 items-center border-b border-accent text-foreground">
+          <Link href="/contact" {...trackProps("cta", "footer", "contact")} className="inline-flex min-h-11 items-center border-b border-accent text-foreground">
             Discuss your project
           </Link>
         </div>
         <nav aria-label="Service navigation" className="grid gap-x-6 sm:grid-cols-2">
           {services.map((service) => (
-            <Link key={service.slug} href={`/services/${service.slug}`} className="inline-flex min-h-11 items-center hover:text-foreground">
+            <Link key={service.slug} href={`/services/${service.slug}`} {...trackProps("service", "footer", service.slug)} className="inline-flex min-h-11 items-center hover:text-foreground">
               {service.name}
             </Link>
           ))}

@@ -3,6 +3,8 @@ import Link from "next/link";
 
 import { getStrategyDocuments } from "@fastforwardlabs/content";
 
+import { trackProps } from "@/lib/analytics";
+
 export const metadata: Metadata = {
   title: "Strategy",
   description:
@@ -30,7 +32,7 @@ export default async function StrategyIndexPage() {
               {document.publishedAt}
             </p>
             <h2 className="text-xl leading-tight font-semibold tracking-[-0.04em] sm:text-2xl">
-              <Link href={document.href}>{document.title}</Link>
+              <Link href={document.href} {...trackProps("strategy", "strategy_index", document.slug)}>{document.title}</Link>
             </h2>
             <p className="text-sm leading-7 text-muted sm:text-base sm:leading-8">{document.description}</p>
           </article>

@@ -2,7 +2,8 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { auditBookingUrl } from "@/lib/site";
+import { trackProps } from "@/lib/analytics";
+import { auditBookingHref } from "@/lib/site";
 
 export function AuditCta() {
   return (
@@ -13,8 +14,8 @@ export function AuditCta() {
         <p className="max-w-xl text-base leading-7 text-muted">Bring a bottleneck, an idea, or a question. We’ll look at where AI could help and what a sensible first engagement would look like.</p>
       </div>
       <div className="flex flex-col items-start justify-center gap-5 md:border-l md:border-line md:pl-10">
-        <Button asChild size="lg"><Link href={auditBookingUrl}>Book an AI audit call <ArrowUpRight aria-hidden="true" className="size-4" /></Link></Button>
-        <p className="max-w-sm text-sm leading-6 text-muted">Already have a build or training brief? <Link className="underline underline-offset-4 hover:text-foreground" href="/contact">Send us a project inquiry.</Link></p>
+        <Button asChild size="lg"><Link href={auditBookingHref("home_audit")} {...trackProps("cta", "home_audit", "audit_booking")}>Book an AI audit call <ArrowUpRight aria-hidden="true" className="size-4" /></Link></Button>
+        <p className="max-w-sm text-sm leading-6 text-muted">Already have a build or training brief? <Link className="underline underline-offset-4 hover:text-foreground" href="/contact" {...trackProps("cta", "home_audit", "contact")}>Send us a project inquiry.</Link></p>
       </div>
     </section>
   );

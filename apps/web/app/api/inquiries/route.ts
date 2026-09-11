@@ -1,5 +1,6 @@
 import { createInquiryToken, validateInquiryToken } from "../../../lib/inquiries.server";
 import { inquiryOptions, type InquiryFields } from "../../../lib/inquiry-options";
+import { trackInquiryServer } from "../../../lib/ga4-mp";
 
 export const runtime = "nodejs";
 
@@ -106,6 +107,7 @@ export async function POST(request: Request) {
       console.error("Inquiry delivery rejected", { status: response.status });
       return json({ error: "We couldn’t send your inquiry. Your message is still here; please try again." }, 502);
     }
+    void trackInquiryServer(request, fields.service);
     return json({ success: true });
   } catch {
     console.error("Inquiry delivery unavailable");

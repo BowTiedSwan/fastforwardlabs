@@ -6,7 +6,8 @@ import { AuditCta } from "@/components/audit-cta";
 import { ContentSystemProof } from "@/components/content-system-proof";
 import { Button } from "@/components/ui/button";
 import { services } from "@/lib/services";
-import { auditBookingUrl } from "@/lib/site";
+import { trackProps } from "@/lib/analytics";
+import { auditBookingHref } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "AI Consulting, Automation & Training",
@@ -28,7 +29,7 @@ export default function HomePage() {
           <h1 className="max-w-4xl text-[clamp(3.25rem,8vw,6.7rem)] leading-[0.96] font-semibold tracking-[-0.065em]">Put AI to work<br />in your business<span className="text-accent">.</span></h1>
           <p className="max-w-2xl text-lg leading-8 text-muted sm:text-xl">Find the right opportunities, automate the busywork, and give your team the skills to use AI well. We advise, build, and train, from your first audit call to ongoing AI leadership.</p>
           <div className="flex flex-wrap gap-3 pt-2">
-            <Button asChild size="lg"><Link href={auditBookingUrl}>Book an AI audit call <ArrowUpRight aria-hidden="true" className="size-4" /></Link></Button>
+            <Button asChild size="lg"><Link href={auditBookingHref("home_hero")} {...trackProps("cta", "home_hero", "audit_booking")}>Book an AI audit call <ArrowUpRight aria-hidden="true" className="size-4" /></Link></Button>
             <Button asChild variant="outline" size="lg"><Link href="#services">Explore services <ArrowDown aria-hidden="true" className="size-4" /></Link></Button>
           </div>
         </div>
@@ -47,7 +48,7 @@ export default function HomePage() {
         </div>
         <div className="grid gap-px border border-line bg-line sm:grid-cols-2">
           {services.map((service) => (
-            <Link key={service.slug} href={`/services/${service.slug}`} className="group flex flex-col bg-background p-6 transition-colors hover:bg-white/90 sm:p-8 md:p-9">
+            <Link key={service.slug} href={`/services/${service.slug}`} {...trackProps("service", "home_services", service.slug)} className="group flex flex-col bg-background p-6 transition-colors hover:bg-white/90 sm:p-8 md:p-9">
               <div className="mb-8 flex items-center justify-between"><span className="font-mono text-xs tracking-[0.18em] text-accent">/{service.number}</span><ArrowUpRight aria-hidden="true" className="size-5 text-muted transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></div>
               <h3 className="text-2xl font-semibold tracking-[-0.04em] sm:text-3xl">{service.name}</h3>
               <p className="mt-3 text-base font-medium">{service.prompt}</p>

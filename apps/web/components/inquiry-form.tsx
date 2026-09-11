@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import { ArrowUpRight, Check } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { trackFormStart, trackInquirySubmit } from "@/lib/analytics";
 import { inquiryOptions, type InquiryFields } from "@/lib/inquiry-options";
 
 type FormSession = { token: string; loadedAt: number };
@@ -22,6 +23,7 @@ export function InquiryForm({ initialService }: { initialService: string }) {
   const [error, setError] = useState("");
   const [errors, setErrors] = useState<Partial<Record<InquiryFields, string>>>({});
   const statusRef = useRef<HTMLDivElement>(null);
+  const startedRef = useRef(false);
 
   useEffect(() => {
     let active = true;
@@ -70,6 +72,8 @@ export function InquiryForm({ initialService }: { initialService: string }) {
         return;
       }
       setSent(true);
+      const service = typeof values.service === "string" ? values.service : "general";
+      trackInquirySubmit(service);
     } catch {
       setError("We couldn’t connect to send your inquiry. Your message is still here; please try again.");
     } finally {
@@ -84,7 +88,7 @@ export function InquiryForm({ initialService }: { initialService: string }) {
   const errorFor = (name: InquiryFields) => errors[name] ? <p id={`${name}-error`} className="mt-2 text-sm text-red-800">{errors[name]}</p> : null;
 
   return (
-    <form onSubmit={submit} className="relative space-y-6 border border-line bg-panel p-6 sm:p-9" aria-label="Service inquiry" aria-busy={pending}>
+    <form onSubmit={submit} onFocusCapture={() => { if (startedRef.current) return; startedRef.current = true; trackFormStart(); }} className="relative space-y-6 border border-line bg-panel p-6 sm:p-9" aria-label="Service inquiry" aria-busy={pending}>
       <div><label htmlFor="name" className="form-label">Your name</label><input className="form-input" id="name" name="name" autoComplete="name" required maxLength={100} aria-invalid={!!errors.name} aria-describedby={errors.name ? "name-error" : undefined} />{errorFor("name")}</div>
       <div><label htmlFor="email" className="form-label">Your email</label><input className="form-input" id="email" name="email" type="email" autoComplete="email" required maxLength={254} aria-invalid={!!errors.email} aria-describedby={errors.email ? "email-error" : undefined} />{errorFor("email")}</div>
       <div><label htmlFor="company" className="form-label">Company <span className="font-normal text-muted">(optional)</span></label><input className="form-input" id="company" name="company" autoComplete="organization" maxLength={150} aria-invalid={!!errors.company} aria-describedby={errors.company ? "company-error" : undefined} />{errorFor("company")}</div>

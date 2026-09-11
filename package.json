@@ -7,7 +7,7 @@
     "build": "pnpm --filter web build",
     "lint": "pnpm --filter web lint",
     "repo-map": "node scripts/repo-map.mjs",
-    "test": "pnpm --filter @fastforwardlabs/content test && vitest run apps/web/tests/inquiries.test.ts"
+    "test": "pnpm --filter @fastforwardlabs/content test && vitest run apps/web/tests/inquiries.test.ts apps/web/tests/analytics.test.ts"
   },
   "devDependencies": {
     "@types/node": "^20.19.37",

@@ -3,6 +3,8 @@ import Link from "next/link";
 
 import { getBlogPosts } from "@fastforwardlabs/content";
 
+import { trackProps } from "@/lib/analytics";
+
 export const metadata: Metadata = {
   title: "Blog",
   description:
@@ -32,7 +34,7 @@ export default async function BlogIndexPage() {
             </div>
             <div className="space-y-4">
               <h2 className="text-xl leading-tight font-semibold tracking-[-0.04em] sm:text-2xl">
-                <Link href={post.href}>{post.title}</Link>
+                <Link href={post.href} {...trackProps("blog", "blog_index", post.slug)}>{post.title}</Link>
               </h2>
               <p className="text-sm leading-7 text-muted sm:text-base sm:leading-8">{post.description}</p>
               <div className="flex flex-wrap gap-2">

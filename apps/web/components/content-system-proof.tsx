@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
+import { trackProps } from "@/lib/analytics";
+
 const pipeline = ["Source intake", "Research & triage", "Draft & review", "Publish & measure"];
 
 export function ContentSystemProof({ detail = false }: { detail?: boolean }) {
@@ -11,7 +13,7 @@ export function ContentSystemProof({ detail = false }: { detail?: boolean }) {
         <h2 className="section-heading text-white">The system behind<br />Nuclear News Network.</h2>
         <p className="max-w-xl text-base leading-8 text-white/70">Our own publication runs on an agent-powered pipeline with one editor. It connects source ingestion, research, drafting, and publishing with search metadata and structured data products.</p>
         <p className="max-w-xl text-sm leading-7 text-white/60">That includes reactor and industry trackers, plus JSON/CSV APIs. It’s a working example of the content systems we build.</p>
-        {!detail ? <Link className="inline-flex min-h-11 items-center gap-3 border-b border-white/40 text-sm font-medium text-white transition-colors hover:text-orange-300" href="/services/ai-content-systems">Explore AI content systems <ArrowUpRight aria-hidden="true" className="size-4" /></Link> : <p className="text-sm leading-7 text-white/70">For a publisher, the opportunity is a connected editorial operation. For a B2B team, it’s a repeatable way to turn expertise into owned content. For an energy communicator, it’s a system built around complex, fast-moving sources.</p>}
+        {!detail ? <Link className="inline-flex min-h-11 items-center gap-3 border-b border-white/40 text-sm font-medium text-white transition-colors hover:text-orange-300" href="/services/ai-content-systems" {...trackProps("service", "home_proof", "ai-content-systems")}>Explore AI content systems <ArrowUpRight aria-hidden="true" className="size-4" /></Link> : <p className="text-sm leading-7 text-white/70">For a publisher, the opportunity is a connected editorial operation. For a B2B team, it’s a repeatable way to turn expertise into owned content. For an energy communicator, it’s a system built around complex, fast-moving sources.</p>}
       </div>
       <div className="border border-white/20 p-5 sm:p-7">
         <div className="mb-6 flex items-center justify-between gap-4 border-b border-white/20 pb-5 font-mono text-[11px] uppercase tracking-[0.18em] text-white/60"><span>Inside the workflow</span><span className="text-orange-300">NNN / 01</span></div>

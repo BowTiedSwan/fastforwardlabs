@@ -15,6 +15,7 @@ Other service CTAs open `/contact?service=<slug>` with the relevant service sele
 | `INQUIRY_FROM_EMAIL` | A sender accepted by the Resend account |
 | `INQUIRY_TO_EMAIL` | Private recipient inbox |
 | `INQUIRY_FORM_SECRET` | Random secret of at least 32 characters for form signatures |
+| `GA4_API_SECRET` | Optional. GA4 Measurement Protocol secret so inquiry submits still count when the browser blocks gtag |
 
 Use a verified-domain sender for general production mail. Resend's onboarding
 sender can deliver only to the account's permitted test recipient; this site sends
@@ -53,6 +54,25 @@ WEB_TEST_URL=http://localhost:3100 node --test apps/web/tests/services.smoke.mjs
 The API tests mock only the external mail provider; they exercise the real request
 handler, cookie/token verification, validation, error handling, and private routing.
 Never use real provider credentials in automated tests.
+
+
+## Analytics
+
+The site uses GA4 property `G-PBP6F9XNHR` (override with `NEXT_PUBLIC_GA_ID` if needed).
+
+Conversion map:
+
+| Surface | What fires | Attribution |
+| --- | --- | --- |
+| Audit-call CTAs (header, home, contact, service pages) | `select_content` (`content_type: cta`, `item_id: audit_booking`, `placement`) | Cal.com URL gets `utm_source=website&utm_medium=cta&utm_campaign=audit_call&utm_content=<placement>` |
+| Contact / discuss CTAs | `select_content` (`content_type: cta`, `item_id: contact` or service slug) | Internal `/contact?service=<slug>` |
+| Service cards and related-service links | `select_content` (`content_type: service`) | `placement` is `home_services`, `footer`, `home_proof`, or `service_related` |
+| Blog / strategy index titles | `select_content` (`content_type: blog` or `strategy`) | `item_id` is the slug |
+| Contact form first focus | `form_start` | `form_id: contact_inquiry` |
+| Contact form success | `generate_lead` + `form_submit` in the browser, plus the same events server-side when `GA4_API_SECRET` is set | `lead_source` is the selected service |
+| Client-side route changes | `page_view` | First load is sent by the gtag config snippet |
+
+Mark a conversion in GA4 Admin → Events on `generate_lead` (and optionally `form_submit`).
 
 ## Getting Started
 

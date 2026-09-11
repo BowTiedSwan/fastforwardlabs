@@ -7,7 +7,8 @@ import { InquiryCta } from "@/components/inquiry-cta";
 import { ContentSystemProof } from "@/components/content-system-proof";
 import { Button } from "@/components/ui/button";
 import { getService, services } from "@/lib/services";
-import { auditBookingUrl } from "@/lib/site";
+import { trackProps } from "@/lib/analytics";
+import { auditBookingHref } from "@/lib/site";
 
 type ServicePageProps = { params: Promise<{ slug: string }> };
 
@@ -31,7 +32,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
   if (!service) notFound();
 
   const isAudit = slug === "ai-audit-advisory";
-  const primaryHref = isAudit ? auditBookingUrl : `/contact?service=${slug}`;
+  const primaryHref = isAudit ? auditBookingHref("service_hero") : `/contact?service=${slug}`;
+  const primaryTrack = isAudit ? trackProps("cta", "service_hero", "audit_booking") : trackProps("cta", "service_hero", slug);
   const primaryLabel = isAudit ? "Book an AI audit call" : "Discuss your project";
 
   return (
@@ -39,7 +41,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
       <section>
         <Link href="/#services" className="mb-10 inline-flex min-h-11 items-center gap-2 text-sm text-muted hover:text-foreground"><ArrowLeft aria-hidden="true" className="size-4" /> All services</Link>
         <div className="grid gap-10 lg:grid-cols-[1.6fr_0.8fr] lg:gap-16">
-          <div className="space-y-6"><p className="eyebrow"><span className="mr-3 text-accent">/{service.number}</span>{service.name}</p><h1 className="text-[clamp(2.8rem,6.5vw,5.7rem)] leading-[0.98] font-semibold tracking-[-0.06em]">{service.headline}</h1><p className="max-w-2xl text-lg leading-8 text-muted">{service.introduction}</p><div className="flex flex-wrap gap-3 pt-2"><Button asChild size="lg"><Link href={primaryHref}>{primaryLabel}<ArrowUpRight aria-hidden="true" className="size-4" /></Link></Button><Button asChild variant="outline" size="lg"><Link href="#engagements">See engagement options</Link></Button></div></div>
+          <div className="space-y-6"><p className="eyebrow"><span className="mr-3 text-accent">/{service.number}</span>{service.name}</p><h1 className="text-[clamp(2.8rem,6.5vw,5.7rem)] leading-[0.98] font-semibold tracking-[-0.06em]">{service.headline}</h1><p className="max-w-2xl text-lg leading-8 text-muted">{service.introduction}</p><div className="flex flex-wrap gap-3 pt-2"><Button asChild size="lg"><Link href={primaryHref} {...primaryTrack}>{primaryLabel}<ArrowUpRight aria-hidden="true" className="size-4" /></Link></Button><Button asChild variant="outline" size="lg"><Link href="#engagements">See engagement options</Link></Button></div></div>
           <aside className="self-end border border-line bg-panel p-6 sm:p-8"><p className="eyebrow mb-4">Who it’s for</p><p className="text-base leading-7">{service.audience}</p><ul className="mt-6 space-y-4 border-t border-line pt-6">{service.outcomes.map((outcome) => <li key={outcome} className="flex gap-3 text-sm leading-6 text-muted"><Check aria-hidden="true" className="mt-1 size-4 shrink-0 text-accent" /><span>{outcome}</span></li>)}</ul></aside>
         </div>
       </section>
@@ -59,9 +61,9 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
       <section className="grid gap-8 md:grid-cols-[0.7fr_1.3fr]" aria-labelledby="faq-heading"><div className="space-y-4"><p className="eyebrow">A few practical details</p><h2 id="faq-heading" className="section-heading">Before we start.</h2></div><div className="border-t border-line">{service.faqs.map((faq) => <details key={faq.question} className="group border-b border-line"><summary className="cursor-pointer py-5 pr-4 text-base font-medium">{faq.question}</summary><p className="max-w-2xl pb-6 text-sm leading-7 text-muted">{faq.answer}</p></details>)}</div></section>
 
-      {isAudit ? <section id="audit-call" className="border border-line bg-panel p-6 sm:p-10"><p className="eyebrow mb-4">The starting conversation</p><h2 className="section-heading">Bring one problem worth solving.</h2><p className="mt-5 max-w-2xl text-base leading-8 text-muted">Tell us what your business does, the tools you use, and where work gets stuck. We’ll explore the opportunity together and agree on the most useful next step.</p><Button asChild size="lg" className="mt-7"><Link href={auditBookingUrl}>Book an AI audit call <ArrowUpRight aria-hidden="true" className="size-4" /></Link></Button><p className="mt-5 text-sm text-muted">For ongoing advisory or fractional leadership, <Link href="/contact?service=ai-audit-advisory" className="underline underline-offset-4">send a project inquiry</Link>.</p></section> : <InquiryCta slug={slug} name={service.name} />}
+      {isAudit ? <section id="audit-call" className="border border-line bg-panel p-6 sm:p-10"><p className="eyebrow mb-4">The starting conversation</p><h2 className="section-heading">Bring one problem worth solving.</h2><p className="mt-5 max-w-2xl text-base leading-8 text-muted">Tell us what your business does, the tools you use, and where work gets stuck. We’ll explore the opportunity together and agree on the most useful next step.</p><Button asChild size="lg" className="mt-7"><Link href={auditBookingHref("service_audit")} {...trackProps("cta", "service_audit", "audit_booking")}>Book an AI audit call <ArrowUpRight aria-hidden="true" className="size-4" /></Link></Button><p className="mt-5 text-sm text-muted">For ongoing advisory or fractional leadership, <Link href="/contact?service=ai-audit-advisory" {...trackProps("cta", "service_audit", "contact")} className="underline underline-offset-4">send a project inquiry</Link>.</p></section> : <InquiryCta slug={slug} name={service.name} />}
 
-      <nav aria-label="Other services" className="border-t border-line pt-8"><p className="eyebrow mb-5">Also from Fast Forward Labs</p><div className="grid gap-4 sm:grid-cols-3">{services.filter((other) => other.slug !== slug).map((other) => <Link key={other.slug} href={`/services/${other.slug}`} className="flex min-h-14 items-center justify-between gap-3 border border-line p-4 text-sm font-medium transition-colors hover:border-foreground">{other.name}<ArrowUpRight aria-hidden="true" className="size-4 shrink-0" /></Link>)}</div></nav>
+      <nav aria-label="Other services" className="border-t border-line pt-8"><p className="eyebrow mb-5">Also from Fast Forward Labs</p><div className="grid gap-4 sm:grid-cols-3">{services.filter((other) => other.slug !== slug).map((other) => <Link key={other.slug} href={`/services/${other.slug}`} {...trackProps("service", "service_related", other.slug)} className="flex min-h-14 items-center justify-between gap-3 border border-line p-4 text-sm font-medium transition-colors hover:border-foreground">{other.name}<ArrowUpRight aria-hidden="true" className="size-4 shrink-0" /></Link>)}</div></nav>
     </div>
   );
 }
