@@ -1,9 +1,13 @@
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+
+import { auditBookingUrl } from "@/lib/site";
 
 const navigation = [
-  { href: "/", label: "Home" },
-  { href: "/blog", label: "Blog" },
-  { href: "/strategy", label: "Strategy" },
+  { href: "/#services", label: "Services" },
+  { href: "/#how-we-work", label: "How we work" },
+  { href: "/blog", label: "Insights" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export function SiteHeader() {
@@ -16,12 +20,13 @@ export function SiteHeader() {
         >
           Fast Forward Labs
         </Link>
-        <nav className="flex w-full flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted sm:w-auto sm:justify-end sm:text-sm md:gap-6">
+        <nav aria-label="Main navigation" className="flex w-full flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted sm:w-auto sm:justify-end sm:text-sm md:gap-6">
           {navigation.map((item) => (
-            <Link key={item.href} href={item.href} className="transition-colors hover:text-foreground">
+            <Link key={item.href} href={item.href} className="inline-flex min-h-11 items-center transition-colors hover:text-foreground">
               {item.label}
             </Link>
           ))}
+          <Link href={auditBookingUrl} className="inline-flex min-h-11 items-center gap-2 border-b border-accent font-medium text-foreground">Book an audit <ArrowUpRight aria-hidden="true" className="size-3.5" /></Link>
         </nav>
       </div>
     </header>

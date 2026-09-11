@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: "%s | Fast Forward Labs",
   },
   description:
-    "AI consulting for executive teams that need practical strategy, GEO visibility, and operating clarity.",
+    "AI consulting and implementation: audits and advisory, business automation, executive and staff training, and AI content systems. One-time builds or ongoing support.",
 };
 
 export default function RootLayout({
@@ -38,8 +38,9 @@ export default function RootLayout({
       className={`${sans.variable} ${mono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <a href="#main-content" className="skip-link">Skip to content</a>
         <SiteHeader />
-        <main className="flex-1">{children}</main>
+        <main id="main-content" className="flex-1">{children}</main>
         <SiteFooter />
       </body>
     </html>

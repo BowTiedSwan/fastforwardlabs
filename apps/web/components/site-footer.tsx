@@ -1,14 +1,28 @@
+import Link from "next/link";
+
+import { services } from "@/lib/services";
+
 export function SiteFooter() {
   return (
     <footer className="border-t border-line">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-2 px-6 py-6 text-sm text-muted md:px-10">
-        <p className="font-mono text-xs uppercase tracking-[0.22em] text-foreground">
-          Fast Forward Labs
-        </p>
-        <p>
-          Monorepo-powered landing surface, strategy docs, and daily content
-          generation for executive AI demand.
-        </p>
+      <div className="site-shell grid gap-8 py-10 text-sm text-muted sm:grid-cols-2">
+        <div className="space-y-3">
+          <p className="font-mono text-xs uppercase tracking-[0.22em] text-foreground">
+            Fast Forward Labs
+          </p>
+          <p>Practical AI advice. Working systems. Capable teams.</p>
+          <p className="text-xs">© {new Date().getFullYear()} Fast Forward Labs</p>
+          <Link href="/contact" className="inline-flex min-h-11 items-center border-b border-accent text-foreground">
+            Discuss your project
+          </Link>
+        </div>
+        <nav aria-label="Service navigation" className="grid gap-x-6 sm:grid-cols-2">
+          {services.map((service) => (
+            <Link key={service.slug} href={`/services/${service.slug}`} className="inline-flex min-h-11 items-center hover:text-foreground">
+              {service.name}
+            </Link>
+          ))}
+        </nav>
       </div>
     </footer>
   );
