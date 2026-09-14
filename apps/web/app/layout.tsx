@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 
 import { GoogleAnalytics } from "@/components/google-analytics";
@@ -19,6 +19,14 @@ const mono = IBM_Plex_Mono({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
 });
+
+export const viewport: Viewport = {
+  colorScheme: "light dark",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f2f1ec" },
+    { media: "(prefers-color-scheme: dark)", color: "#111715" },
+  ],
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),

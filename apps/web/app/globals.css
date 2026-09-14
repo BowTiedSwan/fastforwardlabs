@@ -1,12 +1,34 @@
 @import "tailwindcss";
 
 :root {
+  color-scheme: light;
   --background: #f2f1ec;
   --foreground: #121212;
   --muted: #62605a;
   --line: rgba(18, 18, 18, 0.14);
   --panel: rgba(255, 255, 255, 0.58);
+  --panel-hover: rgba(255, 255, 255, 0.9);
   --accent: #bd3e0d;
+  --error: #991b1b;
+  --grid: rgba(18, 18, 18, 0.035);
+  --selection: rgba(231, 88, 26, 0.16);
+}
+
+/* Follow the device appearance, including changes while the page is open. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --background: #111715;
+    --foreground: #f2f1ec;
+    --muted: #aeb9b3;
+    --line: rgba(242, 241, 236, 0.16);
+    --panel: #19221e;
+    --panel-hover: #223029;
+    --accent: #ff9b68;
+    --error: #ff9b9b;
+    --grid: rgba(242, 241, 236, 0.035);
+    --selection: rgba(255, 155, 104, 0.24);
+  }
 }
 
 @theme inline {
@@ -15,7 +37,9 @@
   --color-muted: var(--muted);
   --color-line: var(--line);
   --color-panel: var(--panel);
+  --color-panel-hover: var(--panel-hover);
   --color-accent: var(--accent);
+  --color-error: var(--error);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -36,8 +60,8 @@ body {
   color: var(--foreground);
   font-family: var(--font-geist-sans), sans-serif;
   background-image:
-    linear-gradient(to right, rgba(18, 18, 18, 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(18, 18, 18, 0.035) 1px, transparent 1px);
+    linear-gradient(to right, var(--grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
   background-size: 28px 28px;
 }
 
@@ -119,6 +143,7 @@ summary:focus-visible {
   padding: 0.75rem;
   border: 1px solid var(--line);
   background: var(--background);
+  color: var(--foreground);
   font-size: 1rem;
   line-height: 1.5;
 }
@@ -129,7 +154,7 @@ summary:focus-visible {
 }
 
 .form-input[aria-invalid="true"] {
-  border-color: #991b1b;
+  border-color: var(--error);
 }
 
 .form-honeypot {
@@ -152,7 +177,7 @@ summary:focus-visible {
 }
 
 ::selection {
-  background: rgba(231, 88, 26, 0.16);
+  background: var(--selection);
 }
 
 .prose-shell :where(h1, h2, h3) {

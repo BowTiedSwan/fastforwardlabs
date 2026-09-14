@@ -56,7 +56,7 @@ export default function HomePage() {
         </div>
         <div className="grid gap-px border border-line bg-line sm:grid-cols-2">
           {services.map((service) => (
-            <Link key={service.slug} href={`/services/${service.slug}`} {...trackProps("service", "home_services", service.slug)} className="group flex flex-col bg-background p-6 transition-colors hover:bg-white/90 sm:p-8 md:p-9">
+            <Link key={service.slug} href={`/services/${service.slug}`} {...trackProps("service", "home_services", service.slug)} className="group flex flex-col bg-background p-6 transition-colors hover:bg-panel-hover sm:p-8 md:p-9">
               <div className="mb-8 flex items-center justify-between"><span className="font-mono text-xs tracking-[0.18em] text-accent">/{service.number}</span><ArrowUpRight aria-hidden="true" className="size-5 text-muted transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></div>
               <h3 className="text-2xl font-semibold tracking-[-0.04em] sm:text-3xl">{service.name}</h3>
               <p className="mt-3 text-base font-medium">{service.prompt}</p>

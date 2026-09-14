@@ -20,7 +20,7 @@ export function SiteHeader() {
           href="/"
           className="inline-flex min-h-11 shrink-0 items-center gap-3 whitespace-nowrap font-mono text-xs uppercase tracking-[0.24em] sm:text-sm sm:tracking-[0.28em]"
         >
-          <Image src="/logo.svg" alt="" width={36} height={24} className="h-auto w-9 shrink-0" />
+          <Image src="/logo.svg" alt="" width={36} height={24} className="h-auto w-9 shrink-0 dark:invert" />
           <span>Fast Forward Labs</span>
         </Link>
         <nav aria-label="Main navigation" className="flex w-full flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted sm:text-sm md:w-auto md:justify-end md:gap-6">

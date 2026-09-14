@@ -10,7 +10,7 @@ export function SiteFooter() {
       <div className="site-shell grid gap-8 py-10 text-sm text-muted sm:grid-cols-2">
         <div className="space-y-3">
           <Link href="/" className="inline-flex min-h-11 items-center gap-3 font-mono text-xs uppercase tracking-[0.22em] text-foreground">
-            <Image src="/logo.svg" alt="" width={36} height={24} className="h-auto w-9 shrink-0" />
+            <Image src="/logo.svg" alt="" width={36} height={24} className="h-auto w-9 shrink-0 dark:invert" />
             <span>Fast Forward Labs</span>
           </Link>
           <p>Practical AI advice. Working systems. Capable teams.</p>

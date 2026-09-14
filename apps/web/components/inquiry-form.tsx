@@ -85,7 +85,7 @@ export function InquiryForm({ initialService }: { initialService: string }) {
     return <div ref={statusRef} tabIndex={-1} role="status" className="border border-line bg-panel p-8 sm:p-10"><Check aria-hidden="true" className="mb-6 size-8 text-accent" /><h2 className="text-3xl font-medium tracking-[-0.04em]">Your inquiry is on its way.</h2><p className="mt-4 text-base leading-7 text-muted">Thanks for reaching out. We’ll email you about next steps.</p></div>;
   }
 
-  const errorFor = (name: InquiryFields) => errors[name] ? <p id={`${name}-error`} className="mt-2 text-sm text-red-800">{errors[name]}</p> : null;
+  const errorFor = (name: InquiryFields) => errors[name] ? <p id={`${name}-error`} className="mt-2 text-sm text-error">{errors[name]}</p> : null;
 
   return (
     <form onSubmit={submit} onFocusCapture={() => { if (startedRef.current) return; startedRef.current = true; trackFormStart(); }} className="relative space-y-6 border border-line bg-panel p-6 sm:p-9" aria-label="Service inquiry" aria-busy={pending}>
@@ -95,7 +95,7 @@ export function InquiryForm({ initialService }: { initialService: string }) {
       <div><label htmlFor="service" className="form-label">What can we help with?</label><select className="form-input" id="service" name="service" defaultValue={initialService} aria-invalid={!!errors.service} aria-describedby={errors.service ? "service-error" : undefined}>{inquiryOptions.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}</select>{errorFor("service")}</div>
       <div><label htmlFor="message" className="form-label">Tell us about the work you want to improve</label><p id="message-hint" className="mb-3 text-sm leading-6 text-muted">A few sentences about the process, project, or team is enough to start.</p><textarea className="form-input min-h-36 resize-y" id="message" name="message" required minLength={10} maxLength={5000} rows={5} aria-invalid={!!errors.message} aria-describedby={`message-hint${errors.message ? " message-error" : ""}`} />{errorFor("message")}</div>
       <div className="form-honeypot" aria-hidden="true"><label htmlFor="website">Leave this field empty</label><input id="website" name="website" tabIndex={-1} autoComplete="off" type="text" /></div>
-      {error ? <p role="alert" className="border-l-2 border-red-700 pl-4 text-sm leading-6 text-red-800">{error}</p> : null}
+      {error ? <p role="alert" className="border-l-2 border-error pl-4 text-sm leading-6 text-error">{error}</p> : null}
       <Button disabled={pending} type="submit" size="lg" className="w-full sm:w-auto">{pending ? "Sending inquiry…" : "Send your inquiry"}<ArrowUpRight aria-hidden="true" className="size-4" /></Button>
       <p className="text-xs leading-6 text-muted">We’ll use these details to respond to your inquiry.</p>
     </form>

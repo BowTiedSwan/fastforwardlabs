@@ -78,6 +78,11 @@ Mark a conversion in GA4 Admin → Events on `generate_lead` (and optionally `fo
 
 ### Brand assets and social previews
 
+The site follows the device's light/dark appearance automatically using
+`prefers-color-scheme` in `app/globals.css`, including live system changes.
+Color tokens cover surfaces, text, hover/focus states, and form errors; the
+header/footer mark switches contrast and browser chrome uses matching theme colors.
+
 - `public/logo.svg` is the transparent vector mark used in the header and footer.
 - `app/icon.svg`, `app/favicon.ico` (16–256px), and `app/apple-icon.png` (180px)
   provide browser and home-screen icons through Next.js file-based metadata.
