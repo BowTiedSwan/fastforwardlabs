@@ -34,11 +34,17 @@ test("unknown service URLs return an actual 404", async () => {
   assert.equal(response.status, 404);
 });
 
-test("audit calls lead to the confirmed calendar without exposing a contact email", async () => {
-  for (const path of ["/", ...slugs.map((slug) => `/services/${slug}`)]) {
+test("main CTAs book intro calls and audit bookings stay on the audit service page", async () => {
+  for (const path of ["/", "/contact", ...slugs.map((slug) => `/services/${slug}`)]) {
     const html = await fetch(`${base}${path}`).then((response) => response.text());
     const links = [...html.matchAll(/href="([^"]+)"/g)].map((match) => new URL(match[1].replaceAll("&amp;", "&"), base));
-    assert.ok(links.some((url) => url.origin === "https://cal.com" && url.pathname === "/fast-forward-labs/systems-audit"), `${path} links to booking`);
+    const introLinks = links.filter((url) => url.origin === "https://cal.com" && url.pathname === "/fast-forward-labs/15min");
+    const auditLinks = links.filter((url) => url.origin === "https://cal.com" && url.pathname === "/fast-forward-labs/systems-audit");
+    assert.equal(introLinks.length, path === "/" ? 3 : path === "/contact" ? 2 : 1, `${path} has intro-call CTAs`);
+    assert.equal(auditLinks.length, path === "/services/ai-audit-advisory" ? 2 : 0, `${path} has the right audit booking links`);
+    for (const url of introLinks) assert.equal(url.searchParams.get("utm_campaign"), "intro_call");
+    for (const url of auditLinks) assert.equal(url.searchParams.get("utm_campaign"), "audit_call");
+    assert.match(html, /Book an intro call/);
     assert.ok(!html.includes("mailto:"), `${path} has no public email link`);
   }
 });

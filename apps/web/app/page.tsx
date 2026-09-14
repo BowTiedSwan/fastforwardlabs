@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 
-import { AuditCta } from "@/components/audit-cta";
+import { IntroCta } from "@/components/intro-cta";
 import { ContentSystemProof } from "@/components/content-system-proof";
 import { Button } from "@/components/ui/button";
 import { services } from "@/lib/services";
 import { trackProps } from "@/lib/analytics";
-import { auditBookingHref, homeContent, site } from "@/lib/site";
+import { introBookingHref, homeContent, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: homeContent.title,
@@ -37,7 +37,7 @@ export default function HomePage() {
           <h1 className="max-w-4xl text-[clamp(3.25rem,8vw,6.7rem)] leading-[0.96] font-semibold tracking-[-0.065em]">{homeContent.headline[0]}<br />{homeContent.headline[1]}<span className="text-accent">.</span></h1>
           <p className="max-w-2xl text-lg leading-8 text-muted sm:text-xl">{homeContent.introduction}</p>
           <div className="flex flex-wrap gap-3 pt-2">
-            <Button asChild size="lg"><Link href={auditBookingHref("home_hero")} {...trackProps("cta", "home_hero", "audit_booking")}>Book an AI audit call <ArrowUpRight aria-hidden="true" className="size-4" /></Link></Button>
+            <Button asChild size="lg"><Link href={introBookingHref("home_hero")} {...trackProps("cta", "home_hero", "intro_booking")}>Book an intro call <ArrowUpRight aria-hidden="true" className="size-4" /></Link></Button>
             <Button asChild variant="outline" size="lg"><Link href="#services">Explore services <ArrowDown aria-hidden="true" className="size-4" /></Link></Button>
           </div>
         </div>
@@ -73,7 +73,7 @@ export default function HomePage() {
         <div className="mb-10 grid gap-5 md:grid-cols-2"><div className="space-y-4"><p className="eyebrow">How we work</p><h2 id="process-heading" className="section-heading">A clear scope.<br />A useful outcome.</h2></div><p className="max-w-lg self-end text-base leading-8 text-muted">You may need a single workflow built, a team workshop, or an AI partner at the leadership table. We agree on the deliverables, responsibilities, and cost before the work begins.</p></div>
         <ol className="grid border-t border-line md:grid-cols-3">{process.map((step, index) => <li key={step.title} className="border-b border-line py-7 md:pr-8"><p className="mb-6 font-mono text-xs text-accent">0{index + 1}</p><h3 className="mb-3 text-xl font-medium tracking-[-0.03em]">{step.title}</h3><p className="max-w-sm text-sm leading-7 text-muted">{step.text}</p></li>)}</ol>
       </section>
-      <AuditCta />
+      <IntroCta />
     </div>
   );
 }

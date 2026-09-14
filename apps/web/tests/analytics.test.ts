@@ -1,17 +1,28 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { trackInquiryServer } from "../lib/ga4-mp";
-import { auditBookingHref, auditBookingUrl, withUtm } from "../lib/site";
+import { auditBookingHref, auditBookingUrl, introBookingHref, withUtm } from "../lib/site";
+
+describe("intro booking UTMs", () => {
+  it.each(["header", "home_hero", "home_intro", "contact"] as const)("routes %s to the intro calendar with its own campaign", (placement) => {
+    const url = new URL(introBookingHref(placement));
+    expect(`${url.origin}${url.pathname}`).toBe("https://cal.com/fast-forward-labs/15min");
+    expect(url.searchParams.get("utm_source")).toBe("website");
+    expect(url.searchParams.get("utm_medium")).toBe("cta");
+    expect(url.searchParams.get("utm_campaign")).toBe("intro_call");
+    expect(url.searchParams.get("utm_content")).toBe(placement);
+  });
+});
 
 describe("audit booking UTMs", () => {
   it("keeps the confirmed Cal.com path and tags placement", () => {
-    const href = auditBookingHref("header");
+    const href = auditBookingHref("service_hero");
     const url = new URL(href);
     expect(`${url.origin}${url.pathname}`).toBe(auditBookingUrl);
     expect(url.searchParams.get("utm_source")).toBe("website");
     expect(url.searchParams.get("utm_medium")).toBe("cta");
     expect(url.searchParams.get("utm_campaign")).toBe("audit_call");
-    expect(url.searchParams.get("utm_content")).toBe("header");
+    expect(url.searchParams.get("utm_content")).toBe("service_hero");
   });
 
   it("does not drop existing query params", () => {

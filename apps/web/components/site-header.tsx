@@ -3,7 +3,7 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 
 import { trackProps } from "@/lib/analytics";
-import { auditBookingHref } from "@/lib/site";
+import { introBookingHref } from "@/lib/site";
 
 const navigation = [
   { href: "/#services", label: "Services" },
@@ -29,7 +29,7 @@ export function SiteHeader() {
               {item.label}
             </Link>
           ))}
-          <Link href={auditBookingHref("header")} {...trackProps("cta", "header", "audit_booking")} className="inline-flex min-h-11 items-center gap-2 border-b border-accent font-medium text-foreground">Book an audit <ArrowUpRight aria-hidden="true" className="size-3.5" /></Link>
+          <Link href={introBookingHref("header")} {...trackProps("cta", "header", "intro_booking")} className="inline-flex min-h-11 items-center gap-2 border-b border-accent font-medium text-foreground">Book an intro call <ArrowUpRight aria-hidden="true" className="size-3.5" /></Link>
         </nav>
       </div>
     </header>

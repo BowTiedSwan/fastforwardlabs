@@ -3,7 +3,9 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 ## Services and inquiries
 
 The homepage and `/services/[slug]` share their offer definitions in `lib/services.ts`.
-Audit-call CTAs use the confirmed Cal.com URL in `lib/site.ts`.
+The header, homepage, and contact-page booking CTAs use the 15-minute intro-call
+URL in `lib/site.ts`. The AI Audit & Advisory service page retains its separate
+audit booking URL.
 Other service CTAs open `/contact?service=<slug>` with the relevant service selected.
 
 `/api/inquiries` sends notifications through the Resend HTTP API. Configure these
@@ -64,7 +66,8 @@ Conversion map:
 
 | Surface | What fires | Attribution |
 | --- | --- | --- |
-| Audit-call CTAs (header, home, contact, service pages) | `select_content` (`content_type: cta`, `item_id: audit_booking`, `placement`) | Cal.com URL gets `utm_source=website&utm_medium=cta&utm_campaign=audit_call&utm_content=<placement>` |
+| Intro-call CTAs (header, home, contact) | `select_content` (`content_type: cta`, `item_id: intro_booking`, `placement`) | Cal.com `/15min` URL gets `utm_source=website&utm_medium=cta&utm_campaign=intro_call&utm_content=<placement>` |
+| Audit-call CTAs (AI Audit & Advisory page) | `select_content` (`content_type: cta`, `item_id: audit_booking`, `placement`) | Cal.com `/systems-audit` URL gets `utm_source=website&utm_medium=cta&utm_campaign=audit_call&utm_content=<placement>` |
 | Contact / discuss CTAs | `select_content` (`content_type: cta`, `item_id: contact` or service slug) | Internal `/contact?service=<slug>` |
 | Service cards and related-service links | `select_content` (`content_type: service`) | `placement` is `home_services`, `footer`, `home_proof`, or `service_related` |
 | Blog / strategy index titles | `select_content` (`content_type: blog` or `strategy`) | `item_id` is the slug |
