@@ -7,11 +7,19 @@ import { ContentSystemProof } from "@/components/content-system-proof";
 import { Button } from "@/components/ui/button";
 import { services } from "@/lib/services";
 import { trackProps } from "@/lib/analytics";
-import { auditBookingHref } from "@/lib/site";
+import { auditBookingHref, homeContent, site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "AI Consulting, Automation & Training",
-  description: "AI audits, business automation, executive and staff training, and AI content systems. One-time builds or ongoing support from Fast Forward Labs.",
+  title: homeContent.title,
+  description: homeContent.description,
+  openGraph: {
+    type: "website",
+    siteName: site.name,
+    locale: "en_US",
+    url: site.url,
+    title: `${homeContent.title} | ${site.name}`,
+    description: homeContent.description,
+  },
 };
 
 const process = [
@@ -25,9 +33,9 @@ export default function HomePage() {
     <div className="site-shell space-y-20 pb-16 sm:space-y-24 md:pb-24">
       <section className="grid gap-10 border-b border-line pt-12 pb-12 sm:pt-16 md:pb-16 lg:grid-cols-[1.7fr_0.7fr] lg:gap-16 lg:pt-20">
         <div className="space-y-7">
-          <p className="eyebrow flex items-center gap-3"><span className="size-2 bg-accent" aria-hidden="true" />AI consulting & implementation</p>
-          <h1 className="max-w-4xl text-[clamp(3.25rem,8vw,6.7rem)] leading-[0.96] font-semibold tracking-[-0.065em]">Put AI to work<br />in your business<span className="text-accent">.</span></h1>
-          <p className="max-w-2xl text-lg leading-8 text-muted sm:text-xl">Find the right opportunities, automate the busywork, and give your team the skills to use AI well. We advise, build, and train, from your first audit call to ongoing AI leadership.</p>
+          <p className="eyebrow flex items-center gap-3"><span className="size-2 bg-accent" aria-hidden="true" />{homeContent.eyebrow}</p>
+          <h1 className="max-w-4xl text-[clamp(3.25rem,8vw,6.7rem)] leading-[0.96] font-semibold tracking-[-0.065em]">{homeContent.headline[0]}<br />{homeContent.headline[1]}<span className="text-accent">.</span></h1>
+          <p className="max-w-2xl text-lg leading-8 text-muted sm:text-xl">{homeContent.introduction}</p>
           <div className="flex flex-wrap gap-3 pt-2">
             <Button asChild size="lg"><Link href={auditBookingHref("home_hero")} {...trackProps("cta", "home_hero", "audit_booking")}>Book an AI audit call <ArrowUpRight aria-hidden="true" className="size-4" /></Link></Button>
             <Button asChild variant="outline" size="lg"><Link href="#services">Explore services <ArrowDown aria-hidden="true" className="size-4" /></Link></Button>

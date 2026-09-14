@@ -4,6 +4,7 @@ import { IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 import { GoogleAnalytics } from "@/components/google-analytics";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { site } from "@/lib/site";
 
 import "./globals.css";
 
@@ -20,12 +21,20 @@ const mono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
   title: {
-    default: "Fast Forward Labs",
+    default: site.name,
     template: "%s | Fast Forward Labs",
   },
-  description:
-    "AI consulting and implementation: audits and advisory, business automation, executive and staff training, and AI content systems. One-time builds or ongoing support.",
+  description: site.description,
+  openGraph: {
+    type: "website",
+    siteName: site.name,
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default function RootLayout({

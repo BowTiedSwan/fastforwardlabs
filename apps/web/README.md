@@ -76,6 +76,29 @@ Mark a conversion in GA4 Admin → Events on `generate_lead` (and optionally `fo
 
 ## Getting Started
 
+### Brand assets and social previews
+
+- `public/logo.svg` is the transparent vector mark used in the header and footer.
+- `app/icon.svg`, `app/favicon.ico` (16–256px), and `app/apple-icon.png` (180px)
+  provide browser and home-screen icons through Next.js file-based metadata.
+- `app/opengraph-image.tsx` generates the 1200×630 homepage PNG at build time,
+  using `next/og`, local IBM Plex fonts, the shared logo, and the same homepage
+  copy and service definitions as the site. X/Twitter uses this image through
+  Open Graph fallback with `summary_large_image` metadata.
+- `lib/site.ts` defines the production URL used for absolute sharing metadata.
+  Update it if the site's primary domain changes.
+
+After `pnpm build`, run a production server and verify sharing metadata:
+
+```bash
+pnpm --filter web start --port 3100
+# In another terminal, from the repository root:
+WEB_TEST_URL=http://localhost:3100 node --test apps/web/tests/social.smoke.mjs
+```
+
+This check needs a production server: Next.js development mode deliberately
+resolves generated social-image URLs to localhost.
+
 First, run the development server:
 
 ```bash
