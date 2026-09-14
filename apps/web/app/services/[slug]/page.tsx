@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
   const service = getService(slug);
   if (!service) notFound();
   return {
-    title: service.slug === "ai-audit-advisory" ? "AI Audit, Advisory & Fractional Chief AI Officer" : service.name,
+    title: service.slug === "ai-audit-advisory" ? "AI Audit, Advisory & Fractional Chief AI Officer" : service.slug === "ai-content-systems" ? "AI Content Systems for SEO & AI Search Visibility" : service.name,
     description: `${service.summary} ${service.formats}.`,
   };
 }
@@ -46,6 +46,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
         </div>
       </section>
 
+      {slug === "ai-content-systems" ? <ContentSystemProof detail /> : null}
+
       <section id="engagements" aria-labelledby="engagements-heading">
         <div className="mb-8 grid gap-5 md:grid-cols-[1.2fr_0.8fr]"><div className="space-y-4"><p className="eyebrow">Engagement options</p><h2 id="engagements-heading" className="section-heading">Ways to work together.</h2></div><p className="max-w-md self-end text-sm leading-7 text-muted">We agree on scope, timing, fees, and responsibilities before starting. Choose the level of involvement that fits your team.</p></div>
         <div className={`grid gap-5 ${service.tiers.length === 3 ? "lg:grid-cols-3" : "md:grid-cols-2"}`}>
@@ -54,8 +56,6 @@ export default async function ServicePage({ params }: ServicePageProps) {
       </section>
 
       <section aria-labelledby="examples-heading"><p className="eyebrow mb-4">In practice</p><h2 id="examples-heading" className="section-heading max-w-2xl">{service.examplesTitle}</h2><div className="mt-8 grid gap-x-10 sm:grid-cols-2">{service.examples.map((example) => <div key={example.title} className="border-t border-line py-7"><h3 className="mb-3 text-xl font-medium tracking-[-0.025em]">{example.title}</h3><p className="max-w-xl text-sm leading-7 text-muted">{example.description}</p></div>)}</div></section>
-
-      {slug === "ai-content-systems" ? <ContentSystemProof detail /> : null}
 
       <section aria-labelledby="delivery-heading"><p className="eyebrow mb-4">From first conversation to delivery</p><h2 id="delivery-heading" className="section-heading">How the work happens.</h2><ol className="mt-8 grid border-t border-line md:grid-cols-3">{service.steps.map((step, index) => <li key={step.title} className="border-b border-line py-7 md:pr-8"><p className="mb-5 font-mono text-xs text-accent">0{index + 1}</p><h3 className="mb-3 text-xl font-medium tracking-[-0.025em]">{step.title}</h3><p className="text-sm leading-7 text-muted">{step.description}</p></li>)}</ol></section>
 

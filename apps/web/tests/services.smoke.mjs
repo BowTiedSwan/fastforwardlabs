@@ -37,7 +37,17 @@ test("unknown service URLs return an actual 404", async () => {
 test("audit calls lead to the confirmed calendar without exposing a contact email", async () => {
   for (const path of ["/", ...slugs.map((slug) => `/services/${slug}`)]) {
     const html = await fetch(`${base}${path}`).then((response) => response.text());
-    assert.ok(html.includes('href="https://cal.com/fast-forward-labs/systems-audit"'), `${path} links to booking`);
+    const links = [...html.matchAll(/href="([^"]+)"/g)].map((match) => new URL(match[1].replaceAll("&amp;", "&"), base));
+    assert.ok(links.some((url) => url.origin === "https://cal.com" && url.pathname === "/fast-forward-labs/systems-audit"), `${path} links to booking`);
     assert.ok(!html.includes("mailto:"), `${path} has no public email link`);
+  }
+});
+
+test("content-system proof links readers directly to both publications", async () => {
+  for (const path of ["/", "/services/ai-content-systems"]) {
+    const html = await fetch(`${base}${path}`).then((response) => response.text());
+    for (const publication of ["https://nuclearnewsnetwork.com/", "https://deai.org/"]) {
+      assert.ok(html.includes(`href="${publication}"`), `${path} links to ${publication}`);
+    }
   }
 });
