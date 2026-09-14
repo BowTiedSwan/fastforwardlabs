@@ -82,7 +82,7 @@ export function InquiryForm({ initialService }: { initialService: string }) {
   }
 
   if (sent) {
-    return <div ref={statusRef} tabIndex={-1} role="status" className="border border-line bg-panel p-8 sm:p-10"><Check aria-hidden="true" className="mb-6 size-8 text-accent" /><h2 className="text-3xl font-medium tracking-[-0.04em]">Your inquiry is on its way.</h2><p className="mt-4 text-base leading-7 text-muted">Thanks for telling us about your project. We’ll review it and reply to the email address you provided to discuss the next step.</p></div>;
+    return <div ref={statusRef} tabIndex={-1} role="status" className="border border-line bg-panel p-8 sm:p-10"><Check aria-hidden="true" className="mb-6 size-8 text-accent" /><h2 className="text-3xl font-medium tracking-[-0.04em]">Your inquiry is on its way.</h2><p className="mt-4 text-base leading-7 text-muted">Thanks for reaching out. We’ll email you about next steps.</p></div>;
   }
 
   const errorFor = (name: InquiryFields) => errors[name] ? <p id={`${name}-error`} className="mt-2 text-sm text-red-800">{errors[name]}</p> : null;

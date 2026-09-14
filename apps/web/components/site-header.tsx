@@ -7,7 +7,7 @@ import { auditBookingHref } from "@/lib/site";
 const navigation = [
   { href: "/#services", label: "Services" },
   { href: "/#how-we-work", label: "How we work" },
-  { href: "/blog", label: "Insights" },
+  // { href: "/blog", label: "Insights" },
   { href: "/contact", label: "Contact" },
 ];
 
