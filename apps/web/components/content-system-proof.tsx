@@ -33,11 +33,11 @@ export function ContentSystemProof({ detail = false }: { detail?: boolean }) {
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/20 pb-5 font-mono text-[11px] uppercase tracking-[0.16em] text-white/65"><span>{nuclear.name}</span><span className="text-orange-300">Launch / Jul 09</span></div>
           <div className="flex-1">
             <dl className="py-7">
-              <dt className="text-sm text-white/75">AI citations / day · 7-day average</dt>
-              <dd className="mt-2 text-[clamp(4rem,8vw,7rem)] leading-none font-medium tracking-[-0.065em] text-orange-300 tabular-nums">{number(nuclear.dailyCitations)}</dd>
+              <dt className="text-sm text-white/75">Total AI citations</dt>
+              <dd className="mt-2 text-[clamp(4rem,8vw,7rem)] leading-none font-medium tracking-[-0.065em] text-orange-300 tabular-nums">{compact(nuclear.citations)}</dd>
             </dl>
             <dl className="grid grid-cols-2 gap-5 border-t border-white/20 pt-6">
-              <div><dt className="text-xs leading-5 text-white/65">Total AI citations</dt><dd className="mt-2 text-3xl font-medium tracking-tight tabular-nums">{compact(nuclear.citations)}</dd></div>
+              <div><dt className="text-xs leading-5 text-white/65">AI citations / day<br />7-day average</dt><dd className="mt-2 text-3xl font-medium tracking-tight tabular-nums">{number(nuclear.dailyCitations)}</dd></div>
               <div><dt className="text-xs leading-5 text-white/65">Google + Bing impressions</dt><dd className="mt-2 text-3xl font-medium tracking-tight tabular-nums">{compact(nuclearSearchImpressions)}</dd></div>
             </dl>
           </div>

@@ -57,3 +57,14 @@ test("content-system proof links readers directly to both publications", async (
     }
   }
 });
+
+test("content-system proof leads with total Nuclear News Network citations", async () => {
+  const html = await fetch(`${base}/services/ai-content-systems`).then((response) => response.text());
+  const totalLabel = html.indexOf("Total AI citations");
+  const dailyLabel = html.indexOf("AI citations / day · 7-day average");
+  assert.ok(totalLabel >= 0, "total citation label is present");
+  assert.ok(dailyLabel >= 0, "daily citation label is present");
+  assert.ok(totalLabel < dailyLabel, "total citations appear before the daily average");
+  assert.match(html.slice(totalLabel, dailyLabel), />10\.2k</);
+  assert.match(html.slice(dailyLabel), />436</);
+});
