@@ -19,9 +19,9 @@ export function ContentSystemProof() {
       <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
         <div className="flex flex-col items-start gap-6">
           <p className="eyebrow">Built and proven in our own publications</p>
-          <h2 id="content-results-heading" className="section-heading text-white">From launch to a source AI cites.<br /><span className="text-orange-300">In just over three months.</span></h2>
+          <h2 id="content-results-heading" className="section-heading text-white">From launch to industry reference.<br /><span className="text-orange-300">In just over three months.</span></h2>
           <p className="max-w-xl text-base leading-8 text-white/80">You want to be found when people research your sector—and cited when AI answers their questions. That’s what we build content systems to achieve.</p>
-          <p className="max-w-xl text-sm leading-7 text-white/70">We launched {nuclear.name} on {nuclear.launch}. By {reportingEnd}, our publication had earned {compact(nuclear.citations)} AI citations and {compact(nuclearSearchImpressions)} Google + Bing search impressions, with one editor running the operation.</p>
+          <p className="max-w-xl text-sm leading-7 text-white/70">We launched {nuclear.name} on {nuclear.launch}. By {reportingEnd}, our publication had earned {compact(nuclear.citations)} AI citations and {compact(nuclearSearchImpressions)} Google + Bing search impressions, with one editor running the operation. In Bing, it is the third organic result for “nuclear energy news”.</p>
           <div className="flex flex-wrap gap-x-7 gap-y-3">
             <a className={proofLink} href={nuclear.url} target="_blank" rel="noopener noreferrer" {...trackProps("publication", placement, "nuclear-news-network")}>Visit {nuclear.name} <ArrowUpRight aria-hidden="true" className="size-4 shrink-0" /><span className="sr-only"> (opens in a new tab)</span></a>
             <Link className={proofLink} href="/services/ai-content-systems" {...trackProps("service", placement, "ai-content-systems")}>Explore AI content systems <ArrowUpRight aria-hidden="true" className="size-4 shrink-0" /></Link>
