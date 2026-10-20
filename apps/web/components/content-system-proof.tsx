@@ -8,6 +8,7 @@ const { nuclear, deai, reviewedAt, reportingEnd, citationSource, citationPeriod 
 const compact = (value: number) => `${(value / 1000).toFixed(1)}k`;
 const number = (value: number) => value.toLocaleString("en-US");
 const nuclearSearchImpressions = nuclear.googleImpressions + nuclear.bingImpressions;
+const nuclearAiCitations = nuclear.citations + nuclear.googleGenAiImpressions;
 const deaiSearchImpressions = deai.googleImpressions + deai.bingImpressions;
 const proofLink = "inline-flex min-h-11 items-center gap-3 border-b border-white/40 text-sm font-medium text-white transition-colors hover:text-orange-300 focus-visible:outline-orange-300";
 
@@ -33,14 +34,14 @@ export function ContentSystemProof() {
           <div className="flex-1">
             <dl className="py-7">
               <dt className="text-sm text-white/75">Total AI citations</dt>
-              <dd className="mt-2 text-[clamp(4rem,8vw,7rem)] leading-none font-medium tracking-[-0.065em] text-orange-300 tabular-nums">{compact(nuclear.citations)}</dd>
+              <dd className="mt-2 text-[clamp(4rem,8vw,7rem)] leading-none font-medium tracking-[-0.065em] text-orange-300 tabular-nums">{compact(nuclearAiCitations)}</dd>
             </dl>
             <dl className="grid grid-cols-2 gap-5 border-t border-white/20 pt-6">
               <div><dt className="text-xs leading-5 text-white/65">AI citations / day<br />{nuclear.dailyCitationsLabel}</dt><dd className="mt-2 text-3xl font-medium tracking-tight tabular-nums">{number(nuclear.dailyCitations)}</dd></div>
               <div><dt className="text-xs leading-5 text-white/65">Google + Bing impressions</dt><dd className="mt-2 text-3xl font-medium tracking-tight tabular-nums">{compact(nuclearSearchImpressions)}</dd></div>
             </dl>
           </div>
-          <p className="mt-6 text-xs leading-5 text-white/65">AI citations: {citationSource}.<br />{compact(nuclear.googleImpressions)} Google + {compact(nuclear.bingImpressions)} Bing search impressions.<br />Plus {compact(nuclear.googleGenAiImpressions)} Google Generative AI impressions (3 months).<br />Daily average: {citationPeriod}.</p>
+          <p className="mt-6 text-xs leading-5 text-white/65">Total AI citations = {compact(nuclear.citations)} Bing ({citationSource}) + {compact(nuclear.googleGenAiImpressions)} Google Generative AI.<br />{compact(nuclear.googleImpressions)} Google + {compact(nuclear.bingImpressions)} Bing search impressions.<br />Daily average: {citationPeriod}.</p>
         </div>
       </div>
 
@@ -59,7 +60,7 @@ export function ContentSystemProof() {
 
       <details className="mt-8 border-t border-white/20 pt-2 text-xs leading-6 text-white/65">
         <summary className="cursor-pointer py-3 focus-visible:outline-orange-300">Sources & measurement · Snapshot reviewed {reviewedAt}</summary>
-        <p>AI citations come from Bing Webmaster Tools’ AI Performance report for {citationSource}. The daily figures are rounded averages: {number(nuclear.dailyCitations)} for {nuclear.name} for {citationPeriod} and {number(deai.dailyCitations)} for {deai.name} (six days, October 12–17, 2026). A citation is an appearance as a source in an AI answer, not a site visit. Total citations are dashboard values and may be rounded.</p>
+        <p>AI citations come from Bing Webmaster Tools’ AI Performance report for {citationSource}; {nuclear.name}’s headline total adds Google’s Generative AI count ({number(nuclear.googleGenAiImpressions)}). The daily figures are rounded averages: {number(nuclear.dailyCitations)} for {nuclear.name} for {citationPeriod} and {number(deai.dailyCitations)} for {deai.name} (six days, October 12–17, 2026). A citation is an appearance as a source in an AI answer, not a site visit. Totals are dashboard values and may be rounded.</p>
         <p className="mt-2">Search totals were checked through the Search Console MCP from each publication’s launch through {reportingEnd}. {nuclear.name}: {number(nuclear.googleImpressions)} Google + {number(nuclear.bingImpressions)} Bing = {number(nuclearSearchImpressions)} impressions. {deai.name}: {number(deai.googleImpressions)} Google + {number(deai.bingImpressions)} Bing = {number(deaiSearchImpressions)} impressions. Google totals are counted through the latest settled data; recent search data can be revised as reporting completes. Combined impressions count search appearances, not unique people.</p>
       </details>
     </section>

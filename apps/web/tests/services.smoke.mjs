@@ -66,6 +66,6 @@ test("content-system proof leads with total Nuclear News Network citations", asy
   assert.ok(totalLabel >= 0, "total citation label is present");
   assert.ok(dailyLabel >= 0, "daily citation label is present");
   assert.ok(totalLabel < dailyLabel, "total citations appear before the daily average");
-  assert.match(html.slice(totalLabel, dailyLabel), />25\.6k</);
+  assert.match(html.slice(totalLabel, dailyLabel), />30\.0k</);
   assert.match(html.slice(dailyLabel, impressionsLabel), />661</);
 });

@@ -64,6 +64,13 @@ rounded values (**25.6K**, **10.1K**); no exact daily-table sum was available
 this round, unlike the September snapshot. The dashboards also report average
 cited pages of 25 (NNN) and 15 (DeAI); not currently shown on the site.
 
+Nuclear News Network's headline **Total AI citations** combines the Bing
+figure (25.6K) with the Google Generative AI count (4.44K) = **30.0K**, per the
+user's October 20, 2026 direction (Google screenshot shows the Gen AI report at
+4.44K; treated as Google's AI citation figure and included in the total). DeAI's
+total remains the Bing dashboard value only, as no Google Gen AI figure was
+provided for it.
+
 | Site | Stored citations | Display | Oct 12–18 daily citations | Daily average |
 | --- | ---: | ---: | --- | ---: |
 | Nuclear News Network | 25,600 | 10.2k → 25.6k | 780, 853, 857, 659, 739, 415, 322 | 661 (from 660.714) |
